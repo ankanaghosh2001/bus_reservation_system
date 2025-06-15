@@ -16,7 +16,7 @@ const LandingPage = () => {
 
   const loginUser = async (data) => {
     try {
-      const response = await axios.post("http://localhost:5000/login", {
+      const response = await axios.post("https://bus-anywhere.onrender.com/login", {
         username: data.username,
         phone: data.phone,
         password: data.password
@@ -39,7 +39,7 @@ const LandingPage = () => {
 
   const registerUser = async (data) => {
     try {
-      const response = await axios.post("http://localhost:5000/register", {
+      const response = await axios.post("https://bus-anywhere.onrender.com/register", {
         username: data.username,
         phone: data.phone,
         password: data.password
@@ -59,7 +59,7 @@ const LandingPage = () => {
 
   const resetPassword = async(data) => {
     try{
-      const response = await axios.post("http://localhost:5000/reset_password", {
+      const response = await axios.post("https://bus-anywhere.onrender.com/reset_password", {
         username: data.username,
         phone: data.phone,
         password: data.password

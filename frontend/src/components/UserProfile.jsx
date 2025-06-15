@@ -10,7 +10,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/user_tickets/${username}`);
+        const res = await axios.get(`https://bus-anywhere.onrender.com/user_tickets/${username}`);
         if (res.data.success) {
           setTickets(res.data.tickets);
         }
