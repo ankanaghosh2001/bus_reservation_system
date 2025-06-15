@@ -32,8 +32,7 @@ const SeatBoookingPage = () => {
     const storedUsername = localStorage.getItem("username");
     if (storedUsername) {
       setUsername(storedUsername);
-    }
-    else {
+    } else {
       toast.error("Please log in to access booking page");
       navigate("/");
     }
@@ -57,13 +56,13 @@ const SeatBoookingPage = () => {
   }, []);
 
   const handleLogout = () => {
-      let confirmation = window.confirm("Do you want to log-out?");
-      if(confirmation){
-        localStorage.removeItem("username");
-        localStorage.removeItem("userID");
-        navigate("/");
-      }
-  }
+    let confirmation = window.confirm("Do you want to log-out?");
+    if (confirmation) {
+      localStorage.removeItem("username");
+      localStorage.removeItem("userID");
+      navigate("/");
+    }
+  };
 
   const setJourney = async (data) => {
     try {
@@ -122,7 +121,9 @@ const SeatBoookingPage = () => {
       });
 
       if (response.data.success) {
-        toast.success("Booking Successful! Check your ticket in your profile section.");
+        toast.success(
+          "Booking Successful! Check your ticket in your profile section."
+        );
       } else {
         toast.error("Booking Failed" + response.data.message);
       }
@@ -141,7 +142,9 @@ const SeatBoookingPage = () => {
           </Link>
         </h3>
         <img src={switchIcon} alt="" />
-        <h3 id="logout" onClick={handleLogout}>Log-Out</h3>
+        <h3 id="logout" onClick={handleLogout}>
+          Log-Out
+        </h3>
       </div>
       <div className="reservationContainer">
         <div className="tripDetails">
@@ -149,9 +152,12 @@ const SeatBoookingPage = () => {
             <h3>Trip Details</h3>
           </div>
           <form action="" onSubmit={handleSubmit(setJourney)}>
-            <label htmlFor="from">From : </label><br />
+            <label htmlFor="from">From : </label>
+            <br />
             <select id="source" {...register("source", { required: true })}>
-              <option value="" disabled>-- Select Source --</option>
+              <option value="" disabled selected>
+                -- Select Source --
+              </option>
               {sourceLocs.map((loc, idx) => (
                 <option key={idx} value={loc}>
                   {loc}
@@ -159,9 +165,15 @@ const SeatBoookingPage = () => {
               ))}
             </select>
             <br />
-            <label htmlFor="to">To : </label><br />
-            <select id="destination" {...register("destination", { required: true })}>
-              <option value="" disabled>-- Select Destination --</option>
+            <label htmlFor="to">To : </label>
+            <br />
+            <select
+              id="destination"
+              {...register("destination", { required: true })}
+            >
+              <option value="" disabled selected>
+                -- Select Destination --
+              </option>
               {destLocs.map((loc, idx) => (
                 <option key={idx} value={loc}>
                   {loc}

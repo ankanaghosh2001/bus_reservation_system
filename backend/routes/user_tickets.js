@@ -15,7 +15,6 @@ router.get("/:username", (req, res) => {
     }
 
     const userID = result[0].phone;
-    console.log(userID);
     const ticketQuery = `
       SELECT 
         MIN(bs.SID) AS ticket_id,
@@ -40,7 +39,6 @@ router.get("/:username", (req, res) => {
     `;
 
     conn.query(ticketQuery, [userID], (err, tickets) => {
-      console.log(tickets);
       if (err) {
         return res.status(500).json({ success: false, message: "Failed to fetch ticket history" });
       }

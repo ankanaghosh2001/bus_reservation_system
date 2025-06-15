@@ -7,24 +7,29 @@ const router = express.Router();
 const urlEncodedParser = bodyParser.urlencoded({ extended: true });
 
 router.get('/', urlEncodedParser, (req, res) => {
-    const query = `select * from trip_details`;
+    const sourceQuery = "SELECT DISTINCT source FROM trip_details";
+    const destQuery = "SELECT DISTINCT destination FROM trip_details";
 
-    conn.query(query, [], (err, result) => {
-        if(err){
-            return res.status(500).send("Server Error!");
+    let sourceLocs = [];
+    let destLocs = [];
+
+    conn.query(sourceQuery, (err, sourceResult) => {
+        if (err) {
+            return res.status(500).send("Error fetching sources!");
         }
 
-        let size = result.length;
-        let sourceLocs = [];
-        let destLocs = []
+        sourceLocs = sourceResult.map(row => row.source);
 
-        for(let i=0;i<size;i++){
-            sourceLocs.push(result[i].source);
-            destLocs.push(result[i].destination);
-        }
+        conn.query(destQuery, (err, destResult) => {
+            if (err) {
+                return res.status(500).send("Error fetching destinations!");
+            }
 
-        return res.status(200).json({ sourceLocs, destLocs});
-    })
-})
+            destLocs = destResult.map(row => row.destination);
+
+            return res.status(200).json({ sourceLocs, destLocs });
+        });
+    });
+});
 
 export default router;
