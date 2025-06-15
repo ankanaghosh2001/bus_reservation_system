@@ -46,8 +46,42 @@ A full-stack bus ticket booking application built for learning and showcase — 
     npm install
     npm run dev
 
-4. **Usage**  
-    Register / Log in → Choose your route & date → Select available seats (blocked seats greyed) → Click "Pay Now"(Payment Simulation) → View Ticket via user profile → Download PDF ticket
+4. **ER Diagram**
+    ```mermaid
+    erDiagram
+    users {
+        varchar phone PK
+        varchar username
+        varchar password
+    }
 
+    trip_details {
+        int RID PK
+        varchar source
+        varchar destination
+        int fare
+    }
+
+    trip_instances {
+        int id PK
+        int RID FK
+        date tDate
+    }
+
+    booked_seats {
+        int SID PK
+        int trip_id FK
+        varchar userID FK
+        int seat_number
+        timestamp booked_at
+    }
+
+    users ||--o{ booked_seats : "books"
+    trip_details ||--o{ trip_instances : "has"
+    trip_instances ||--o{ booked_seats : "includes"
+
+
+5. **Usage**  
+    Register / Log in → Choose your route & date → Select available seats (blocked seats greyed) → Click "Pay Now"(Payment Simulation) → View Ticket via user profile → Download PDF ticket
 
 
