@@ -2,6 +2,12 @@
 
 A full-stack bus ticket booking application built for learning and showcase — with user registration, seat selection, real-time seat availability, downloadable ticket, and user ticket history views.
 
+Check it out - [Click Here](https://bus-anywhere.netlify.app)
+Hosted on 
+- Netlify(Frontend)
+- Render(Backend)
+- Database(Railway)
+
 ---
 
 ## 🛠️ Tech Stack
