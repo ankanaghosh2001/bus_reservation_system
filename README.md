@@ -38,7 +38,7 @@ A full-stack bus ticket booking application built for learning and showcase — 
     # Fill in DB_HOST, DB_USER, DB_PASS, DB_NAME
     npm run start
     
-(Make sure MySQL is running locally. Run schema.sql to create tables.) 
+(Make sure MySQL is running locally. Run bus_reservation_db.sql to create tables.) 
    
 3. **Frontend Setup**
     ```bash
