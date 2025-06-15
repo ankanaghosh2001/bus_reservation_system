@@ -70,7 +70,7 @@ const LandingPage = () => {
         setIsLogin(true);
         setForgetPass(false);
       } else{
-        alert(response.data);
+        alert("Password Updation Failed. Invalid username or phone number!");
       }
     } catch(error){
       alert("Password Updation failed: " + (error.response?.data || error.message));

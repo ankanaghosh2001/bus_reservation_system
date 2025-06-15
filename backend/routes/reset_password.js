@@ -4,13 +4,13 @@ import conn from "../db.js";
 import bcrypt from 'bcrypt';
 
 const router = express.Router();
-const urlEncodedParser = bodyParser.urlencoded({extended: true});
+const urlEncodedParser = bodyParser.urlencoded({ extended: true });
 
 const saltRounds = 10;
 
-router.post('/', urlEncodedParser, async(req, res) => {
-    const {username, phone, password} = req.body;
-    
+router.post('/', urlEncodedParser, async (req, res) => {
+    const { username, phone, password } = req.body;
+
     try {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
@@ -24,6 +24,10 @@ router.post('/', urlEncodedParser, async(req, res) => {
                         console.error("Password Updation Error:", err);
                         res.status(500).send("Password Updation Failed");
                     });
+                }
+
+                if (result.affectedRows === 0) {
+                    return res.status(404).send("User not found or invalid details");
                 }
 
                 conn.commit((err) => {
