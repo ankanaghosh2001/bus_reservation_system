@@ -12,42 +12,35 @@ router.post('/', urlEncodedParser, async (req, res) => {
     const { username, phone, password } = req.body;
 
     try {
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        conn.beginTransaction((err) => {
-            if (err) throw err;
+    // Step 1: Verify user exists
+    const checkQuery = 'SELECT * FROM users WHERE username = ? AND phone = ?';
+    conn.query(checkQuery, [username, phone], (err, results) => {
+      if (err) {
+        console.error("Error checking user:", err);
+        return res.status(500).json({ success: false, message: "Server error" });
+      }
 
-            const query = 'update users set password = ? where phone = ? and username = ?';
-            conn.query(query, [hashedPassword, phone, username], (err, result) => {
-                if (err) {
-                    return conn.rollback(() => {
-                        console.error("Password Updation Error:", err);
-                        res.status(500).send("Password Updation Failed");
-                    });
-                }
+      if (results.length === 0) {
+        return res.status(404).json({ success: false, message: "User not found" });
+      }
 
-                if (result.affectedRows === 0) {
-                    return conn.rollback(() => {
-                        res.status(401).send("User not found or invalid details");
-                    });
-                }
+      // Step 2: User exists — perform update
+      const updateQuery = 'UPDATE users SET password = ? WHERE username = ? AND phone = ?';
+      conn.query(updateQuery, [hashedPassword, username, phone], (err, result) => {
+        if (err) {
+          console.error("Error updating password:", err);
+          return res.status(500).json({ success: false, message: "Update failed" });
+        }
 
-                conn.commit((err) => {
-                    if (err) {
-                        return conn.rollback(() => {
-                            console.error("Commit Error:", err);
-                            res.status(500).send("Password couldn't be reset!");
-                        });
-                    }
-
-                    res.status(200).send("Password Updated successfully");
-                });
-            });
-        });
-    } catch (error) {
-        console.error("Hashing Error:", error);
-        res.status(500).send("Server error while hashing password");
-    }
+        return res.status(200).json({ success: true, message: "Password updated successfully" });
+      });
+    });
+  } catch (err) {
+    console.error("Hashing error:", err);
+    return res.status(500).json({ success: false, message: "Password hashing failed" });
+  }
 })
 
 export default router;
