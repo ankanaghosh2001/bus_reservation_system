@@ -28,8 +28,7 @@ router.post('/', urlEncodedParser, async (req, res) => {
 
                 if (result.affectedRows === 0) {
                     return conn.rollback(() => {
-                        console.warn("No user matched.");
-                        res.status(404).send("User not found or invalid details");
+                        res.status(401).send("User not found or invalid details");
                     });
                 }
 

@@ -73,7 +73,7 @@ const LandingPage = () => {
         alert("Password Updation Failed. Invalid username or phone number!");
       }
     } catch(error){
-      alert("Password Updation failed: " + (error.response?.data || error.message));
+      alert("Password Reset Failed. Invalid credentials ");
     }
     reset();
   }
