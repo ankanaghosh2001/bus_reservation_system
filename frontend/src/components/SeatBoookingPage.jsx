@@ -128,7 +128,7 @@ const SeatBoookingPage = () => {
         toast.error("Booking Failed" + response.data.message);
       }
     } catch {
-      toast.error("Server Failure ! Seat Booking Failed");
+      toast.error("Please select your journey details! Seat Booking Failed");
     }
   };
 
