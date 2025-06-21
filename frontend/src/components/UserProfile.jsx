@@ -34,7 +34,8 @@ const UserProfile = () => {
     doc.text(`Persons Travelling: ${ticket.persons_travelling}`, 20, 80);
     doc.text(`Booked Seats: ${ticket.booked_seats}`, 20, 90);
     doc.text(`Fare: Rs.${ticket.fare * ticket.persons_travelling}`, 20, 100);
-    doc.text(`Date & Time: ${new Date(ticket.date_time).toLocaleString()}`, 20, 110);
+    doc.text(`Date & Time: ${new Date(ticket.date_time).toLocaleString("en-GB")}`, 20, 110);
+    doc.text(`Journey Date: ${new Date(ticket.journey_date).toLocaleDateString("en-GB")}`,20, 120);
 
     doc.save(`Bus.Anywhere_Ticket_${ticket.ticket_id}.pdf`);
   };
@@ -53,6 +54,7 @@ const UserProfile = () => {
             <th>Fare(in Rs.)</th>
             <th>Booked Seats</th>
             <th>Date & Time</th>
+            <th>Journey Date</th>
             <th>Download</th>
           </tr>
         </thead>
@@ -65,7 +67,8 @@ const UserProfile = () => {
               <td>{ticket.persons_travelling}</td>
               <td>{ticket.fare * ticket.persons_travelling}</td>
               <td>{ticket.booked_seats}</td>
-              <td>{new Date(ticket.date_time).toLocaleString()}</td>
+              <td>{new Date(ticket.date_time).toLocaleString("en-GB")}</td>
+              <td>{new Date(ticket.journey_date).toLocaleDateString("en-GB")}</td>
               <td>
                 <button onClick={() => downloadPDF(ticket)}>Download Ticket</button>
               </td>

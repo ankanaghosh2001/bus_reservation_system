@@ -65,6 +65,10 @@ const SeatBoookingPage = () => {
   };
 
   const setJourney = async (data) => {
+    if(data.source === data.destination){
+      alert("You can't select the same source and destination!");
+      return;
+    }
     try {
       const response = await axios.get("https://bus-anywhere.onrender.com/seat_booking", {
         params: {

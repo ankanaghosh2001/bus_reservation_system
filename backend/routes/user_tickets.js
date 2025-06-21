@@ -23,7 +23,8 @@ router.get("/:username", (req, res) => {
         COUNT(bs.seat_number) AS persons_travelling,
         td.fare,
         GROUP_CONCAT(bs.seat_number ORDER BY bs.seat_number) AS booked_seats,
-        bs.booked_at AS date_time
+        bs.booked_at AS date_time,
+        ti.tDate as journey_date
       FROM 
         booked_seats bs
       JOIN 
