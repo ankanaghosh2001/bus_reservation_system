@@ -7,7 +7,7 @@ import SeatBox from "./SeatBox";
 import userIcon from "../assets/user2.svg";
 import switchIcon from "../assets/on-off2.svg";
 
-const SeatBoookingPage = () => {
+const SeatBookingPage = () => {
   const {
     register,
     handleSubmit,
@@ -27,6 +27,7 @@ const SeatBoookingPage = () => {
   const [tripInstanceId, setTripInstanceId] = useState(null);
   const [sourceLocs, setSourceLocs] = useState([]);
   const [destLocs, setDestLocs] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
@@ -84,6 +85,7 @@ const SeatBoookingPage = () => {
         localStorage.setItem("fare", response.data.fare);
         setBookedSeats(bookedSeats || []);
         setTripInstanceId(trip_instance_id);
+        setIsDisabled(false);
       } else {
         alert(response.error);
       }
@@ -191,6 +193,8 @@ const SeatBoookingPage = () => {
               name="tDate"
               id="tDate"
               onChange={(e) => setTravelDate(e.target.value)}
+              min={new Date(Date.now()).toISOString("en-GB").split("T")[0]}
+              max={new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString("en-GB").split("T")[0]}
               {...register("tDate", { required: true })}
             />
             <br />
@@ -210,12 +214,12 @@ const SeatBoookingPage = () => {
           </div>
         </div>
 
-        <div className="seat-layout" id="seat-layout">
+        <div className={`seat-layout ${isDisabled ? 'disabled' : ''}`} id="seat-layout">
           <div className="heading">
             <h3>Seat Layout (Select Your Seats)</h3>
           </div>
           <div className="seats">
-            <div className="left-seats">
+            <div className={`left-seats ${isDisabled ? 'disabled' : ''}`}>
               {Array.from({ length: 24 }, (_, i) => (
                 <SeatBox
                   key={i + 1}
@@ -223,6 +227,7 @@ const SeatBoookingPage = () => {
                   id={"seat" + (i + 1)}
                   onToggle={updatePersonCount}
                   isBooked={bookedSeats.includes(i + 1)}
+                  isDisabled = {isDisabled}
                 />
               ))}
             </div>
@@ -234,6 +239,7 @@ const SeatBoookingPage = () => {
                   id={"seat" + (i + 25)}
                   onToggle={updatePersonCount}
                   isBooked={bookedSeats.includes(i + 25)}
+                  isDisabled = {isDisabled}
                 />
               ))}
             </div>
@@ -244,4 +250,4 @@ const SeatBoookingPage = () => {
   );
 };
 
-export default SeatBoookingPage;
+export default SeatBookingPage;

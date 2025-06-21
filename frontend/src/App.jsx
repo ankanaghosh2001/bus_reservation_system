@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Footer from './components/Footer';
 import AboutUs from './components/AboutUs';
 import ContactUs from './components/ContactUs';
-import SeatBoookingPage from './components/SeatBoookingPage';
+import SeatBookingPage from './components/SeatBookingPage';
 import UserProfile from './components/UserProfile';
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
     },
     {
       path: '/seat-booking',
-      element: <><Navbar/><SeatBoookingPage/><Footer/></>
+      element: <><Navbar/><SeatBookingPage/><Footer/></>
     },
     {
       path: '/user/:username',

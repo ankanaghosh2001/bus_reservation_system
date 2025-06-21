@@ -309,6 +309,11 @@ footer{
       }
     }
   }
+  .seat-layout.disabled{
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+  
 }
 
 .seat{
@@ -328,6 +333,13 @@ footer{
     box-shadow:
       0 0 5px 2px rgba(12, 183, 12, 0.81);
   }
+}
+
+.seat.disabled{
+    cursor: not-allowed;
+    &:hover{
+      box-shadow: none;
+    }
 }
 
 .seat.checked{
