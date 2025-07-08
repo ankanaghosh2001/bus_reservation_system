@@ -42,7 +42,9 @@ const SeatBookingPage = () => {
   useEffect(() => {
     const fetchLocs = async () => {
       try {
-        const res = await axios.get("https://bus-anywhere.onrender.com/fetch_locations");
+        const res = await axios.get(
+          "https://bus-anywhere.onrender.com/fetch_locations"
+        );
         if (res.status === 200) {
           const { sourceLocs, destLocs } = res.data;
           setSourceLocs(sourceLocs);
@@ -66,18 +68,21 @@ const SeatBookingPage = () => {
   };
 
   const setJourney = async (data) => {
-    if(data.source === data.destination){
+    if (data.source === data.destination) {
       alert("You can't select the same source and destination!");
       return;
     }
     try {
-      const response = await axios.get("https://bus-anywhere.onrender.com/seat_booking", {
-        params: {
-          source: data.source,
-          destination: data.destination,
-          tDate: data.tDate,
-        },
-      });
+      const response = await axios.get(
+        "https://bus-anywhere.onrender.com/seat_booking",
+        {
+          params: {
+            source: data.source,
+            destination: data.destination,
+            tDate: data.tDate,
+          },
+        }
+      );
       if (response.status === 200) {
         const { fare, bookedSeats, trip_instance_id } = response.data;
         setFare(fare);
@@ -120,11 +125,14 @@ const SeatBookingPage = () => {
     console.log(storedUserID, tripInstanceId);
 
     try {
-      const response = await axios.post("https://bus-anywhere.onrender.com/reserve_seats", {
-        trip_id: tripInstanceId,
-        userID: storedUserID,
-        seatNumbers,
-      });
+      const response = await axios.post(
+        "https://bus-anywhere.onrender.com/reserve_seats",
+        {
+          trip_id: tripInstanceId,
+          userID: storedUserID,
+          seatNumbers,
+        }
+      );
 
       if (response.data.success) {
         toast.success(
@@ -194,7 +202,11 @@ const SeatBookingPage = () => {
               id="tDate"
               onChange={(e) => setTravelDate(e.target.value)}
               min={new Date(Date.now()).toISOString("en-GB").split("T")[0]}
-              max={new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString("en-GB").split("T")[0]}
+              max={
+                new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+                  .toISOString("en-GB")
+                  .split("T")[0]
+              }
               {...register("tDate", { required: true })}
             />
             <br />
@@ -214,12 +226,15 @@ const SeatBookingPage = () => {
           </div>
         </div>
 
-        <div className={`seat-layout ${isDisabled ? 'disabled' : ''}`} id="seat-layout">
+        <div
+          className={`seat-layout ${isDisabled ? "disabled" : ""}`}
+          id="seat-layout"
+        >
           <div className="heading">
             <h3>Seat Layout (Select Your Seats)</h3>
           </div>
           <div className="seats">
-            <div className={`left-seats ${isDisabled ? 'disabled' : ''}`}>
+            <div className={"left-seats"}>
               {Array.from({ length: 24 }, (_, i) => (
                 <SeatBox
                   key={i + 1}
@@ -227,7 +242,7 @@ const SeatBookingPage = () => {
                   id={"seat" + (i + 1)}
                   onToggle={updatePersonCount}
                   isBooked={bookedSeats.includes(i + 1)}
-                  isDisabled = {isDisabled}
+                  isDisabled={isDisabled}
                 />
               ))}
             </div>
@@ -239,7 +254,7 @@ const SeatBookingPage = () => {
                   id={"seat" + (i + 25)}
                   onToggle={updatePersonCount}
                   isBooked={bookedSeats.includes(i + 25)}
-                  isDisabled = {isDisabled}
+                  isDisabled={isDisabled}
                 />
               ))}
             </div>

@@ -50,10 +50,10 @@ const UserProfile = () => {
             <th>Ticket ID</th>
             <th>Source</th>
             <th>Destination</th>
-            <th>Persons Travelling</th>
-            <th>Fare(in Rs.)</th>
-            <th>Booked Seats</th>
-            <th>Date & Time</th>
+            <th className='hide-mobile'>Persons Travelling</th>
+            <th className='hide-mobile'>Fare(in Rs.)</th>
+            <th className='hide-mobile'>Booked Seats</th>
+            <th className='hide-mobile'>Date & Time</th>
             <th>Journey Date</th>
             <th>Download</th>
           </tr>
@@ -64,10 +64,10 @@ const UserProfile = () => {
               <td>{ticket.ticket_id}</td>
               <td>{ticket.source}</td>
               <td>{ticket.destination}</td>
-              <td>{ticket.persons_travelling}</td>
-              <td>{ticket.fare * ticket.persons_travelling}</td>
-              <td>{ticket.booked_seats}</td>
-              <td>{new Date(ticket.date_time).toLocaleString("en-GB")}</td>
+              <td className='hide-mobile'>{ticket.persons_travelling}</td>
+              <td className='hide-mobile'>{ticket.fare * ticket.persons_travelling}</td>
+              <td className='hide-mobile'>{ticket.booked_seats}</td>
+              <td className='hide-mobile'>{new Date(ticket.date_time).toLocaleString("en-GB")}</td>
               <td>{new Date(ticket.journey_date).toLocaleDateString("en-GB")}</td>
               <td>
                 <button onClick={() => downloadPDF(ticket)}>Download Ticket</button>
