@@ -4,7 +4,7 @@ A full-stack bus ticket booking application built for learning and showcase — 
 
 <!--Check it out - [Click Here](https://bus-anywhere.netlify.app)  -->
   
-**Previously Hosted on** - 
+**Previously hosted on** - 
 - Netlify(Frontend)
 - Render(Backend)
 - Database(Railway)
