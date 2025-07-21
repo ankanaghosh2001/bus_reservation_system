@@ -43,7 +43,7 @@ const SeatBookingPage = () => {
     const fetchLocs = async () => {
       try {
         const res = await axios.get(
-          "https://bus-anywhere.onrender.com/fetch_locations"
+          "http://localhost:5000/fetch_locations"
         );
         if (res.status === 200) {
           const { sourceLocs, destLocs } = res.data;
@@ -74,7 +74,7 @@ const SeatBookingPage = () => {
     }
     try {
       const response = await axios.get(
-        "https://bus-anywhere.onrender.com/seat_booking",
+        "http://localhost:5000/seat_booking",
         {
           params: {
             source: data.source,
@@ -126,7 +126,7 @@ const SeatBookingPage = () => {
 
     try {
       const response = await axios.post(
-        "https://bus-anywhere.onrender.com/reserve_seats",
+        "http://localhost:5000/reserve_seats",
         {
           trip_id: tripInstanceId,
           userID: storedUserID,

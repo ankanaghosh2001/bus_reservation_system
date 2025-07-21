@@ -16,7 +16,7 @@ const LandingPage = () => {
 
   const loginUser = async (data) => {
     try {
-      const response = await axios.post("https://bus-anywhere.onrender.com/login", {
+      const response = await axios.post("http://localhost:5000/login", {
         username: data.username,
         phone: data.phone,
         password: data.password
@@ -39,7 +39,7 @@ const LandingPage = () => {
 
   const registerUser = async (data) => {
     try {
-      const response = await axios.post("https://bus-anywhere.onrender.com/register", {
+      const response = await axios.post("http://localhost:5000/register", {
         username: data.username,
         phone: data.phone,
         password: data.password
@@ -59,7 +59,7 @@ const LandingPage = () => {
 
   const resetPassword = async(data) => {
     try{
-      const response = await axios.post("https://bus-anywhere.onrender.com/reset_password", {
+      const response = await axios.post("http://localhost:5000/reset_password", {
         username: data.username,
         phone: data.phone,
         password: data.password
@@ -94,9 +94,11 @@ const LandingPage = () => {
               <input placeholder="Enter Your Contact No." type="tel" {...register("phone", {required: {value: true, message: "Phone Number is required"}, maxLength:{value: 10, message: "Phone Number must contain 10 digits"}, minLength:{value: 10, message: "Phone Number must contain 10 digits"}})} />
               {errors.phone && <div className='red'>{errors.phone.message}</div>}
               <br />
-              <input placeholder="Enter Your Password" type={showPassword ? "text" : "password"}  {...register("password", {required: {value: true, message: "Password is required"}, maxLength:{value: 15, message: "Passwords cannot exceed 15 characters"}, minLength:{value: 8, message: "Password must contain at least 8 characters"}})} />
-              {errors.password && <div className='red'>{errors.password.message}</div>}
-              <img src={showPassword ? eyeIcon : hideEyeIcon} alt="" onClick={() => setShowPassword(!showPassword)}/>
+              <div className="passwordGrp">
+                <input placeholder="Enter Your Password" type={showPassword ? "text" : "password"}  {...register("password", {required: {value: true, message: "Password is required"}, maxLength:{value: 15, message: "Passwords cannot exceed 15 characters"}, minLength:{value: 8, message: "Password must contain at least 8 characters"}})} />
+                {errors.password && <div className='red'>{errors.password.message}</div>}
+                <img src={showPassword ? eyeIcon : hideEyeIcon} alt="" onClick={() => setShowPassword(!showPassword)}/>
+              </div>
               <br />
               {isLogin ? <p id='forgetPass' onClick={() => setForgetPass(true)}>Forgot Your Password?</p> : ""}
               <input type="submit" value="Submit" disabled={isSubmitting}/>
@@ -119,9 +121,11 @@ const LandingPage = () => {
               <input placeholder="Enter Your Contact No." type="tel" {...register("phone", {required: {value: true, message: "Phone Number is required"}, maxLength:{value: 10, message: "Phone Number must contain 10 digits"}, minLength:{value: 10, message: "Phone Number must contain 10 digits"}})} />
               {errors.phone && <div className='red'>{errors.phone.message}</div>}
               <br />
-              <input placeholder="Enter Your New Password" type={showPassword ? "text" : "password"}  {...register("password", {required: {value: true, message: "Password is required"}, maxLength:{value: 15, message: "Passwords cannot exceed 15 characters"}, minLength:{value: 8, message: "Password must contain at least 8 characters"}})} />
-              {errors.password && <div className='red'>{errors.password.message}</div>}
-              <img src={showPassword ? eyeIcon : hideEyeIcon} alt="" onClick={() => setShowPassword(!showPassword)}/>
+              <div className="passwordGrp">
+                <input placeholder="Enter Your New Password" type={showPassword ? "text" : "password"}  {...register("password", {required: {value: true, message: "Password is required"}, maxLength:{value: 15, message: "Passwords cannot exceed 15 characters"}, minLength:{value: 8, message: "Password must contain at least 8 characters"}})} />
+                {errors.password && <div className='red'>{errors.password.message}</div>}
+                <img src={showPassword ? eyeIcon : hideEyeIcon} alt="" onClick={() => setShowPassword(!showPassword)}/>
+              </div>
               <br />
               {}
               <input type="submit" value="Submit" disabled={isSubmitting}/>

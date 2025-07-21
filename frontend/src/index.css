@@ -52,9 +52,23 @@ ul{
   }
 }
 
+@media(max-width: 1024px){
+  nav{
+    width: auto;
+  }
+  nav .left{
+    padding-left: 1.5rem;
+  }
+  ul{
+    li{
+      padding-left: 1.5rem;
+      font-size: 1.1rem;
+    }
+  }
+}
+
 @media(max-width: 768px){
   nav{
-    /* width: max-content; */
     width: auto;
   }
   nav .left{
@@ -133,15 +147,20 @@ ul{
           color: var(--activeCol);
         }
       }
-      img{
-        height: 1.8rem;
-        color: var(--baseCol1) !important;
-        position: absolute;
-        right: 8%;
-        bottom: 41%;
-        cursor: pointer;
-      }
+      .passwordGrp{
+        position: relative;
+        width: 100%;
+        img{
+          height: 1.8rem;
+          color: var(--baseCol1) !important;
+          position: absolute;
+          right: 8%;
+          bottom: 30%;
+          cursor: pointer;
+        }
 
+      }
+      
       #forgetPass{
         padding: 0.7rem 1rem;
         text-align: right;
@@ -158,6 +177,32 @@ ul{
       span{
         text-decoration: underline;
         cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (max-width:1024px){
+  .landing-container{
+    width: auto;
+    flex-direction: column;
+
+    .landingImage{
+      img{
+        width: 45rem;
+      }
+    }
+    .landingForm{
+      height: auto;
+      width: 40rem;
+      form{
+        input{
+          width: 85%;
+        }
+
+        #forgetPass{
+          padding-right: 1.7rem;
+        }
       }
     }
   }
@@ -184,11 +229,14 @@ ul{
           padding: 0.8rem 1.1rem;
           font-size: 0.8rem;
         }
-        img{
-          height: 1.5rem;
-          right: 6%;
-          bottom: 42%;
+        .passwordGrp{
+          img{
+            height: 1.5rem;
+            right: 6%;
+            bottom: 30%;
+          }
         }
+        
         #forgetPass{
           font-size: 0.8rem;
           font-weight: 500;
@@ -249,6 +297,24 @@ footer{
   img{
     height: 1.7rem;
     padding: 0 0.5rem;
+  }
+}
+
+@media (max-width:1024px){
+  .userSection{
+    margin-left: 20%;
+    margin-top: 3rem;
+    padding: 0.7rem;
+    h3{
+      font-size: 0.9rem;
+      cursor: pointer;
+      a{
+        font-size: 0.9rem;
+      }
+    }
+    img{
+      height: 1.5rem;
+    }
   }
 }
 
@@ -410,6 +476,85 @@ footer{
     opacity: 0.8;
   }
   
+}
+
+@media (max-width:1024px){
+  .reservationContainer{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: max-content;
+    .tripDetails{
+      height: max-content;
+      width: 60%;
+      padding-bottom: 1rem;
+      form{
+        label{
+          font-size: 1.3rem;
+        }
+        input{
+          width: 80%;
+          font-size: 0.9rem;
+        }
+        input[type='date']{
+          width: 93%;
+        }
+        input[type='submit']{
+          margin-top: 1rem;
+          padding: 0.7rem 1.2rem;
+          font-size: 0.9rem;
+        }
+        select{
+          padding: 0.5rem 1.2rem;
+          width: 100%;
+          font-family: var(--baseFont1);
+          font-size: 1rem;
+          font-weight: 500;
+          color: var(--baseCol1);
+          border: 2px solid var(--baseCol1);
+          border-radius: 0.8rem;
+          margin: 0.5rem 0;
+        }
+      }
+      .persons, .fare{
+        h3{
+          font-size: 1.1rem;
+          margin-top: 1rem;
+        }
+      }
+      .payFare{
+        button{
+          padding: 0.7rem 1.2rem;
+          font-size: 1rem;
+        }
+      }
+    }
+    .seat-layout{
+      width: 60%;
+      height: max-content;
+      padding: 0 2rem;
+      padding-bottom: 2rem;
+      margin-bottom: 2rem;
+
+      .heading{
+        font-size: 1.1rem;
+        margin-bottom: 1.1rem;
+      }
+
+      .seats{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0 3rem;
+        gap: 2rem;
+
+        .left-seats, .right-seats{
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 768px){
@@ -590,6 +735,40 @@ footer{
         &:hover{
           transform: scale(1.03);
           transition: 0.2s ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width:1024px){
+  .users{
+    h3{
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0 1rem;
+    }
+    table{
+      width: 90%;
+      font-size: 0.8rem;
+      thead{
+        th{
+          padding: 0.6rem;
+        }
+        td{
+          padding: 0.8rem;
+        }
+      }
+      tbody{
+        th{
+          padding: 0.6rem;
+        }
+        td{
+          padding: 0.6rem;
+          button{
+            font-size: 0.7rem;
+            padding: 0.5rem;
+          }
         }
       }
     }
