@@ -43,6 +43,8 @@ backend/node_modules/
 frontend/node_modules/
 jspm_packages/
 
+App_Demo_Video
+
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 

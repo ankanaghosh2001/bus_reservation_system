@@ -4,8 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import SeatBox from "./SeatBox";
-import userIcon from "../assets/user2.svg";
-import switchIcon from "../assets/on-off2.svg";
+import { User, Power } from "lucide-react";
 
 const SeatBookingPage = () => {
   const {
@@ -147,15 +146,15 @@ const SeatBookingPage = () => {
   };
 
   return (
-    <>
+    <div className="seatBookingContainer">
       <div className="userSection">
-        <img src={userIcon} alt="" />
+        <User className="userUtilIcons" alt="" />
         <h3>
           <Link to={`/user/${username}`} className="username-link">
-            Hello, {username}
+            Hello, <span>{username}</span>
           </Link>
         </h3>
-        <img src={switchIcon} alt="" />
+        <Power className="userUtilIcons" alt="" />
         <h3 id="logout" onClick={handleLogout}>
           Log-Out
         </h3>
@@ -261,7 +260,7 @@ const SeatBookingPage = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import bus from '../assets/bus.svg';
-import eyeIcon from '../assets/eye.svg';
-import hideEyeIcon from '../assets/hide.svg';
+import bus from '../assets/bus.png';
+import { Eye, EyeOff } from 'lucide-react';
 
 const LandingPage = () => {
   const { register, handleSubmit, setError, reset, watch, formState: { errors, isSubmitting } } = useForm();
@@ -95,9 +94,12 @@ const LandingPage = () => {
               {errors.phone && <div className='red'>{errors.phone.message}</div>}
               <br />
               <div className="passwordGrp">
-                <input placeholder="Enter Your Password" type={showPassword ? "text" : "password"}  {...register("password", {required: {value: true, message: "Password is required"}, maxLength:{value: 15, message: "Passwords cannot exceed 15 characters"}, minLength:{value: 8, message: "Password must contain at least 8 characters"}})} />
+                <div className="inputGrp">
+                  <input placeholder="Enter Your Password" type={showPassword ? "text" : "password"}  {...register("password", {required: {value: true, message: "Password is required"}, maxLength:{value: 15, message: "Passwords cannot exceed 15 characters"}, minLength:{value: 8, message: "Password must contain at least 8 characters"}})} />
+                  {showPassword ? <Eye className="eyeIcon" onClick={() => setShowPassword(!showPassword)}/> : <EyeOff className="eyeIcon" onClick={() => setShowPassword(!showPassword)}/>}
+                </div>
                 {errors.password && <div className='red'>{errors.password.message}</div>}
-                <img src={showPassword ? eyeIcon : hideEyeIcon} alt="" onClick={() => setShowPassword(!showPassword)}/>
+                
               </div>
               <br />
               {isLogin ? <p id='forgetPass' onClick={() => setForgetPass(true)}>Forgot Your Password?</p> : ""}
@@ -122,9 +124,11 @@ const LandingPage = () => {
               {errors.phone && <div className='red'>{errors.phone.message}</div>}
               <br />
               <div className="passwordGrp">
-                <input placeholder="Enter Your New Password" type={showPassword ? "text" : "password"}  {...register("password", {required: {value: true, message: "Password is required"}, maxLength:{value: 15, message: "Passwords cannot exceed 15 characters"}, minLength:{value: 8, message: "Password must contain at least 8 characters"}})} />
+                <div className="inputGrp">
+                  <input placeholder="Enter Your New Password" type={showPassword ? "text" : "password"}  {...register("password", {required: {value: true, message: "Password is required"}, maxLength:{value: 15, message: "Passwords cannot exceed 15 characters"}, minLength:{value: 8, message: "Password must contain at least 8 characters"}})} />
+                  {showPassword ? <Eye className="eyeIcon" onClick={() => setShowPassword(!showPassword)}/> : <EyeOff className="eyeIcon" onClick={() => setShowPassword(!showPassword)}/>}
+                </div>
                 {errors.password && <div className='red'>{errors.password.message}</div>}
-                <img src={showPassword ? eyeIcon : hideEyeIcon} alt="" onClick={() => setShowPassword(!showPassword)}/>
               </div>
               <br />
               {}
