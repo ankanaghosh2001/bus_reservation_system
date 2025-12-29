@@ -7,6 +7,9 @@ import SeatBox from "./SeatBox";
 import { User, Power } from "lucide-react";
 
 const SeatBookingPage = () => {
+
+  const backendApi = import.meta.env.VITE_BACKEND_API || "http://localhost:5000";
+
   const {
     register,
     handleSubmit,
@@ -42,7 +45,7 @@ const SeatBookingPage = () => {
     const fetchLocs = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/fetch_locations"
+          `${backendApi}/fetch_locations`
         );
         if (res.status === 200) {
           const { sourceLocs, destLocs } = res.data;
@@ -73,7 +76,7 @@ const SeatBookingPage = () => {
     }
     try {
       const response = await axios.get(
-        "http://localhost:5000/seat_booking",
+        `${backendApi}/seat_booking`,
         {
           params: {
             source: data.source,
@@ -112,7 +115,7 @@ const SeatBookingPage = () => {
     const seatNumbers = Array.from(selectedSeats).map((seat) =>
       parseInt(seat.dataset.number)
     );
-    console.log(seatNumbers);
+    // console.log(seatNumbers);
 
     const storedUserID = localStorage.getItem("userID");
 
@@ -121,11 +124,11 @@ const SeatBookingPage = () => {
       return;
     }
 
-    console.log(storedUserID, tripInstanceId);
+    // console.log(storedUserID, tripInstanceId);
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/reserve_seats",
+        `${backendApi}/reserve_seats`,
         {
           trip_id: tripInstanceId,
           userID: storedUserID,

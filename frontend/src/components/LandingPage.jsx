@@ -6,6 +6,9 @@ import bus from '../assets/bus.png';
 import { Eye, EyeOff } from 'lucide-react';
 
 const LandingPage = () => {
+
+  const backendApi = import.meta.env.VITE_BACKEND_API || "http://localhost:5000";
+
   const { register, handleSubmit, setError, reset, watch, formState: { errors, isSubmitting } } = useForm();
 
   const [isLogin, setIsLogin] = useState(true);
@@ -15,7 +18,7 @@ const LandingPage = () => {
 
   const loginUser = async (data) => {
     try {
-      const response = await axios.post("http://localhost:5000/login", {
+      const response = await axios.post(`${backendApi}/login`, {
         username: data.username,
         phone: data.phone,
         password: data.password
@@ -38,7 +41,7 @@ const LandingPage = () => {
 
   const registerUser = async (data) => {
     try {
-      const response = await axios.post("http://localhost:5000/register", {
+      const response = await axios.post(`${backendApi}/register`, {
         username: data.username,
         phone: data.phone,
         password: data.password
@@ -58,7 +61,7 @@ const LandingPage = () => {
 
   const resetPassword = async(data) => {
     try{
-      const response = await axios.post("http://localhost:5000/reset_password", {
+      const response = await axios.post(`${backendApi}/reset_password`, {
         username: data.username,
         phone: data.phone,
         password: data.password

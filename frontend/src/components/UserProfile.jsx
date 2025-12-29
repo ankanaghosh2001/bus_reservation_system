@@ -4,13 +4,16 @@ import axios from 'axios';
 import { jsPDF } from "jspdf";
 
 const UserProfile = () => {
+
+  const backendApi = import.meta.env.VITE_BACKEND_API || "http://localhost:5000";
+
   const { username } = useParams();
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/user_tickets/${username}`);
+        const res = await axios.get(`${backendApi}/user_tickets/${username}`);
         if (res.data.success) {
           setTickets(res.data.tickets);
         }

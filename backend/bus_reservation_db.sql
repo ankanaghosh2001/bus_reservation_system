@@ -5,18 +5,17 @@
 -- --------------------------------------------------------
 
 --
--- Table structure for table `booked_seats`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `booked_seats` (
-  `SID` int(11) NOT NULL,
-  `trip_id` int(11) DEFAULT NULL,
-  `userID` varchar(10) NOT NULL,
-  `seat_number` int(11) DEFAULT NULL,
-  `booked_at` timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE `users` (
+  `username` varchar(25) NOT NULL,
+  `phone` varchar(10) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`phone`)
 );
 
-------------------------------------------------------------
+-- ----------------------------------------------------------
 
 --
 -- Table structure for table `trip_details`
@@ -26,7 +25,8 @@ CREATE TABLE `trip_details` (
   `RID` int(4) NOT NULL,
   `source` varchar(20) NOT NULL,
   `destination` varchar(20) NOT NULL,
-  `fare` int(3) NOT NULL
+  `fare` int(3) NOT NULL,
+  PRIMARY KEY (`RID`)
 );
 
 
@@ -39,47 +39,57 @@ CREATE TABLE `trip_details` (
 CREATE TABLE `trip_instances` (
   `id` int(11) NOT NULL,
   `RID` int(11) DEFAULT NULL,
-  `tDate` date DEFAULT NULL
+  `tDate` date DEFAULT NULL,
+  PRIMARY KEY (`id`), 
+  KEY `RID` (`RID`),
+  CONSTRAINT `trip_instances_ibfk_1` FOREIGN KEY (`RID`) REFERENCES `trip_details` (`RID`)
 );
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `booked_seats`
 --
 
-CREATE TABLE `users` (
-  `username` varchar(25) NOT NULL,
-  `phone` varchar(10) NOT NULL,
-  `password` varchar(255) NOT NULL
+CREATE TABLE `booked_seats` (
+  `SID` int(11) NOT NULL,
+  `trip_id` int(11) DEFAULT NULL,
+  `userID` varchar(10) NOT NULL,
+  `seat_number` int(11) DEFAULT NULL,
+  `booked_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`SID`), 
+  KEY `trip_id` (`trip_id`),
+  KEY `userID` (`userID`),
+  CONSTRAINT `booked_seats_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`phone`) ON DELETE CASCADE
 );
+
 
 --
 -- Indexes for table `booked_seats`
 --
-ALTER TABLE `booked_seats`
-  ADD PRIMARY KEY (`SID`),
-  ADD KEY `trip_id` (`trip_id`),
-  ADD KEY `userID` (`userID`);
+-- ALTER TABLE `booked_seats`
+--   ADD PRIMARY KEY (`SID`),
+--   ADD KEY `trip_id` (`trip_id`),
+--   ADD KEY `userID` (`userID`);
 
 --
 -- Indexes for table `trip_details`
 --
-ALTER TABLE `trip_details`
-  ADD PRIMARY KEY (`RID`);
+-- ALTER TABLE `trip_details`
+--   ADD PRIMARY KEY (`RID`);
 
 --
 -- Indexes for table `trip_instances`
 --
-ALTER TABLE `trip_instances`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `RID` (`RID`);
+-- ALTER TABLE `trip_instances`
+--   ADD PRIMARY KEY (`id`),
+--   ADD KEY `RID` (`RID`);
 
 --
 -- Indexes for table `users`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`phone`);
+-- ALTER TABLE `users`
+--   ADD PRIMARY KEY (`phone`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -110,15 +120,15 @@ ALTER TABLE `trip_instances`
 --
 -- Constraints for table `booked_seats`
 --
-ALTER TABLE `booked_seats`
-  ADD CONSTRAINT `booked_seats_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`phone`) ON DELETE CASCADE;
+-- ALTER TABLE `booked_seats`
+--   ADD CONSTRAINT `booked_seats_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`phone`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `trip_instances`
 --
-ALTER TABLE `trip_instances`
-  ADD CONSTRAINT `trip_instances_ibfk_1` FOREIGN KEY (`RID`) REFERENCES `trip_details` (`RID`);
-COMMIT;
+-- ALTER TABLE `trip_instances`
+--   ADD CONSTRAINT `trip_instances_ibfk_1` FOREIGN KEY (`RID`) REFERENCES `trip_details` (`RID`);
+-- COMMIT;
 
 
 -- Data insertion into `trip_details` schema 
@@ -176,6 +186,6 @@ INSERT INTO trip_details (RID, source, destination, fare) VALUES
 (43, 'Haldia', 'Malda', 390),
 (44, 'Haldia', 'Berhampore', 370),
 
-(45, 'Malda', 'Berhampore', 120);
-(46, 'Digha', 'Kolkata', 250);
+(45, 'Malda', 'Berhampore', 120),
+(46, 'Digha', 'Kolkata', 250),
 (47, 'Berhampore', 'Siliguri', 370);
