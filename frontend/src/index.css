@@ -165,6 +165,13 @@ ul{
           color: var(--activeCol);
         }
       }
+      input[type='submit']:disabled{
+        cursor: not-allowed;
+        opacity: 0.7;
+        background-color: rgb(96, 95, 95);
+        color: var(--baseCol1);
+      }
+
       .passwordGrp{
         width: 100%;
         .inputGrp{
@@ -444,6 +451,12 @@ footer{
         &:active{
           color: var(--activeCol);
         }
+      }
+      input[type='submit']:disabled{
+        cursor: not-allowed;
+        opacity: 0.7;
+        background-color: rgb(96, 95, 95);
+        color: var(--baseCol1);
       }
       select{
         padding: 0.5rem 1.2rem;

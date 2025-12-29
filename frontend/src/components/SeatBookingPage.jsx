@@ -212,7 +212,7 @@ const SeatBookingPage = () => {
               {...register("tDate", { required: true })}
             />
             <br />
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Submit" disabled={isSubmitting} />
           </form>
           <div className="persons">
             <h3>Persons Travelling: {person}</h3>
