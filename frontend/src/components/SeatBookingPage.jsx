@@ -93,7 +93,6 @@ const SeatBookingPage = () => {
         setBookedSeats(bookedSeats || []);
         setTripInstanceId(trip_instance_id);
         setIsDisabled(false);
-        setPaymentDone(true);
       } else {
         alert(response.error);
       }
