@@ -93,6 +93,7 @@ const SeatBookingPage = () => {
         setBookedSeats(bookedSeats || []);
         setTripInstanceId(trip_instance_id);
         setIsDisabled(false);
+        setPaymentDone(true);
       } else {
         alert(response.error);
       }
@@ -140,12 +141,20 @@ const SeatBookingPage = () => {
         toast.success(
           "Booking Successful! Check your ticket in your profile section."
         );
+        
+        await setJourney({
+          source: watch("source"),
+          destination: watch("destination"),
+          tDate: watch("tDate"),
+        });
+        setPerson(0);
+        setFare(0);
       } else {
         toast.error("Booking Failed" + response.data.message);
       }
     } catch {
       toast.error("Please select your journey details! Seat Booking Failed");
-    }
+    } 
   };
 
   return (
@@ -167,7 +176,7 @@ const SeatBookingPage = () => {
           <div className="heading">
             <h3>Trip Details</h3>
           </div>
-          <form action="" onSubmit={handleSubmit(setJourney)}>
+          <form onSubmit={handleSubmit(setJourney)}>
             <label htmlFor="from">From : </label>
             <br />
             <select id="source" {...register("source", { required: true })}>
